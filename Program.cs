@@ -1,6 +1,11 @@
 using System;
 using System.Threading;
 
+/*
+	BlitzWare C# example
+	Please read our docs at https://docs.blitzware.xyz/
+*/
+
 namespace BlitzWare
 {
     class Program
