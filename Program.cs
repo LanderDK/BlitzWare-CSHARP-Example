@@ -87,6 +87,8 @@ namespace BlitzWare
             Console.WriteLine("Last login: " + BlitzWareAuth.userData.LastLogin);
             Console.WriteLine("Subscription expiry: " + BlitzWareAuth.userData.ExpiryDate);
 
+            //BlitzWareAuth.DownloadFile("fdf07f63-af97-4813-b025-2cfc9638ce23");
+
             Console.WriteLine("\nClosing in five seconds...");
             Thread.Sleep(5000);
             Environment.Exit(0);

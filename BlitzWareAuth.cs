@@ -467,5 +467,61 @@ namespace BlitzWare
                 Console.WriteLine($"An error occurred: {ex.Message}");
             }
         }
+        public void DownloadFile(string fileId)
+        {
+            if (!Initialized)
+            {
+                Console.WriteLine("Please initialize your application first!");
+                return;
+            }
+            try
+            {
+                HttpClient client = new();
+                string url = ApiUrl + $"/files/download/{fileId}";
+                client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", userData.Token);
+                HttpResponseMessage response = client.GetAsync(url).Result;
+                string outputPath = string.Empty;
+
+                if (response.IsSuccessStatusCode)
+                {
+                    // Extract the file name and extension from the response headers
+                    if (response.Content.Headers.TryGetValues("Content-Disposition", out var contentDispositionValues))
+                    {
+                        string contentDisposition = contentDispositionValues.FirstOrDefault();
+                        if (!string.IsNullOrEmpty(contentDisposition))
+                        {
+                            string[] parts = contentDisposition.Split('=');
+                            if (parts.Length == 2)
+                            {
+                                string fileName = parts[1].Trim('"');
+                                outputPath = Path.Combine(Directory.GetCurrentDirectory(), fileName);
+                            }
+                        }
+                    }
+                    // Save the file if outputPath is not empty
+                    if (!string.IsNullOrEmpty(outputPath))
+                    {
+                        Stream contentStream = response.Content.ReadAsStreamAsync().Result;
+                        FileStream fileStream = File.Create(outputPath);
+                        contentStream.CopyToAsync(fileStream);
+                    }
+                    else
+                    {
+                        Console.WriteLine("Unable to determine the file name.");
+                    }
+                }
+                else
+                {
+                    string errorContent = response.Content.ReadAsStringAsync().Result;
+                    var serializer = new JavaScriptSerializer();
+                    ErrorData errorData = (ErrorData)serializer.Deserialize(errorContent, typeof(ErrorData));
+                    Console.WriteLine($"{errorData.Code}: {errorData.Message}");
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"An error occurred: {ex.Message}");
+            }
+        }
     }
 }
