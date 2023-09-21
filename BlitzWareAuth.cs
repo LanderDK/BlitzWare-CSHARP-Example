@@ -146,18 +146,17 @@ namespace BlitzWare
                 var content = new StringContent(jsonData, Encoding.UTF8, "application/json");
                 HttpResponseMessage response = client.PostAsync(url, content).Result;
 
-                string responseHash = response.Headers.GetValues("X-Response-Hash").FirstOrDefault();
-                string recalculatedHash = Security.CalculateResponseHash(response.Content.ReadAsStringAsync().Result);
-                if (responseHash != recalculatedHash)
-                {
-                    Console.WriteLine("Possible malicious activity detected!");
-                    Thread.Sleep(3000);
-                    Environment.Exit(0);
-                }
-
-
                 if (response.IsSuccessStatusCode)
                 {
+                    string responseHash = response.Headers.GetValues("X-Response-Hash").FirstOrDefault();
+                    string recalculatedHash = Security.CalculateResponseHash(response.Content.ReadAsStringAsync().Result);
+                    if (responseHash != recalculatedHash)
+                    {
+                        Console.WriteLine("Possible malicious activity detected!");
+                        Thread.Sleep(3000);
+                        Environment.Exit(0);
+                    }
+
                     string responseContent = response.Content.ReadAsStringAsync().Result;
                     var serializer = new JavaScriptSerializer();
                     appData = (ApplicationData)serializer.Deserialize(responseContent, typeof(ApplicationData));
@@ -238,18 +237,17 @@ namespace BlitzWare
                 var content = new StringContent(jsonData, Encoding.UTF8, "application/json");
                 HttpResponseMessage response = client.PostAsync(url, content).Result;
 
-                string responseHash = response.Headers.GetValues("X-Response-Hash").FirstOrDefault();
-                string recalculatedHash = Security.CalculateResponseHash(response.Content.ReadAsStringAsync().Result);
-                if (responseHash != recalculatedHash)
-                {
-                    Console.WriteLine("Possible malicious activity detected!");
-                    Thread.Sleep(3000);
-                    Environment.Exit(0);
-                }
-
-
                 if (response.IsSuccessStatusCode)
                 {
+                    string responseHash = response.Headers.GetValues("X-Response-Hash").FirstOrDefault();
+                    string recalculatedHash = Security.CalculateResponseHash(response.Content.ReadAsStringAsync().Result);
+                    if (responseHash != recalculatedHash)
+                    {
+                        Console.WriteLine("Possible malicious activity detected!");
+                        Thread.Sleep(3000);
+                        Environment.Exit(0);
+                    }
+
                     string responseContent = response.Content.ReadAsStringAsync().Result;
                     var serializer = new JavaScriptSerializer();
                     userData = (UserData)serializer.Deserialize(responseContent, typeof(UserData));
@@ -292,18 +290,17 @@ namespace BlitzWare
                 var content = new StringContent(jsonData, Encoding.UTF8, "application/json");
                 HttpResponseMessage response = client.PostAsync(url, content).Result;
 
-                string responseHash = response.Headers.GetValues("X-Response-Hash").FirstOrDefault();
-                string recalculatedHash = Security.CalculateResponseHash(response.Content.ReadAsStringAsync().Result);
-                if (responseHash != recalculatedHash)
-                {
-                    Console.WriteLine("Possible malicious activity detected!");
-                    Thread.Sleep(3000);
-                    Environment.Exit(0);
-                }
-
-
                 if (response.IsSuccessStatusCode)
                 {
+                    string responseHash = response.Headers.GetValues("X-Response-Hash").FirstOrDefault();
+                    string recalculatedHash = Security.CalculateResponseHash(response.Content.ReadAsStringAsync().Result);
+                    if (responseHash != recalculatedHash)
+                    {
+                        Console.WriteLine("Possible malicious activity detected!");
+                        Thread.Sleep(3000);
+                        Environment.Exit(0);
+                    }
+
                     string responseContent = response.Content.ReadAsStringAsync().Result;
                     var serializer = new JavaScriptSerializer();
                     userData = (UserData)serializer.Deserialize(responseContent, typeof(UserData));
@@ -346,18 +343,17 @@ namespace BlitzWare
                 var content = new StringContent(jsonData, Encoding.UTF8, "application/json");
                 HttpResponseMessage response = client.PostAsync(url, content).Result;
 
-                string responseHash = response.Headers.GetValues("X-Response-Hash").FirstOrDefault();
-                string recalculatedHash = Security.CalculateResponseHash(response.Content.ReadAsStringAsync().Result);
-                if (responseHash != recalculatedHash)
-                {
-                    Console.WriteLine("Possible malicious activity detected!");
-                    Thread.Sleep(3000);
-                    Environment.Exit(0);
-                }
-
-
                 if (response.IsSuccessStatusCode)
                 {
+                    string responseHash = response.Headers.GetValues("X-Response-Hash").FirstOrDefault();
+                    string recalculatedHash = Security.CalculateResponseHash(response.Content.ReadAsStringAsync().Result);
+                    if (responseHash != recalculatedHash)
+                    {
+                        Console.WriteLine("Possible malicious activity detected!");
+                        Thread.Sleep(3000);
+                        Environment.Exit(0);
+                    }
+
                     string responseContent = response.Content.ReadAsStringAsync().Result;
                     var serializer = new JavaScriptSerializer();
                     userData = (UserData)serializer.Deserialize(responseContent, typeof(UserData));
@@ -400,18 +396,17 @@ namespace BlitzWare
                 var content = new StringContent(jsonData, Encoding.UTF8, "application/json");
                 HttpResponseMessage response = client.PutAsync(url, content).Result;
 
-                string responseHash = response.Headers.GetValues("X-Response-Hash").FirstOrDefault();
-                string recalculatedHash = Security.CalculateResponseHash(response.Content.ReadAsStringAsync().Result);
-                if (responseHash != recalculatedHash)
-                {
-                    Console.WriteLine("Possible malicious activity detected!");
-                    Thread.Sleep(3000);
-                    Environment.Exit(0);
-                }
-
-
                 if (response.IsSuccessStatusCode)
                 {
+                    string responseHash = response.Headers.GetValues("X-Response-Hash").FirstOrDefault();
+                    string recalculatedHash = Security.CalculateResponseHash(response.Content.ReadAsStringAsync().Result);
+                    if (responseHash != recalculatedHash)
+                    {
+                        Console.WriteLine("Possible malicious activity detected!");
+                        Thread.Sleep(3000);
+                        Environment.Exit(0);
+                    }
+
                     string responseContent = response.Content.ReadAsStringAsync().Result;
                     var serializer = new JavaScriptSerializer();
                     userData = (UserData)serializer.Deserialize(responseContent, typeof(UserData));
