@@ -1,4 +1,6 @@
 using System;
+using System.Diagnostics;
+using System.IO;
 using System.Threading;
 
 /*
@@ -39,7 +41,7 @@ namespace BlitzWare
                     twoFactorCode = Console.ReadLine();
                     if (!BlitzWareAuth.Login(username, password, twoFactorCode))
                         Environment.Exit(0);
-                    BlitzWareAuth.Log(username, "User logged in");
+                    BlitzWareAuth.Log("User logged in");
                     break;
                 case 2:
                     Console.Write("\n\nEnter username: ");
@@ -52,7 +54,7 @@ namespace BlitzWare
                     key = Console.ReadLine();
                     if (!BlitzWareAuth.Register(username, password, email, key))
                         Environment.Exit(0);
-                    BlitzWareAuth.Log(username, "User registered");
+                    BlitzWareAuth.Log("User registered");
                     break;
                 case 3:
                     Console.Write("\n\nEnter username: ");
@@ -63,14 +65,14 @@ namespace BlitzWare
                     key = Console.ReadLine();
                     if (!BlitzWareAuth.Extend(username, password, key))
                         Environment.Exit(0);
-                    BlitzWareAuth.Log(username, "User extended");
+                    BlitzWareAuth.Log("User extended");
                     break;
                 case 4:
                     Console.Write("\n\nEnter license: ");
                     key = Console.ReadLine();
                     if (!BlitzWareAuth.LoginLicenseOnly(key))
                         Environment.Exit(0);
-                    BlitzWareAuth.Log(key, "User login with license");
+                    BlitzWareAuth.Log("User login with license");
                     break;
                 default:
                     Console.WriteLine("\n\nInvalid Selection");
@@ -87,7 +89,29 @@ namespace BlitzWare
             Console.WriteLine("Last login: " + BlitzWareAuth.userData.LastLogin);
             Console.WriteLine("Subscription expiry: " + BlitzWareAuth.userData.ExpiryDate);
 
+            //  Download file to client's device
             //BlitzWareAuth.DownloadFile("fdf07f63-af97-4813-b025-2cfc9638ce23");
+
+            //  Stream file in memory
+            /*Stream fileStream = BlitzWareAuth.StreamFile("58dac4bf-9b25-41da-9616-c01fce76384d");
+            try
+            {
+                using var tempExe = new MemoryStream();
+                fileStream.CopyTo(tempExe);
+                var tempFilePath = Path.GetTempFileName();
+                File.WriteAllBytes(tempFilePath, tempExe.ToArray());
+                var startInfo = new ProcessStartInfo
+                {
+                    FileName = tempFilePath,
+                    UseShellExecute = false,
+                };
+
+                Process.Start(startInfo);
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"An error occurred: {ex.Message}");
+            }*/
 
             Console.WriteLine("\nClosing in five seconds...");
             Thread.Sleep(5000);
